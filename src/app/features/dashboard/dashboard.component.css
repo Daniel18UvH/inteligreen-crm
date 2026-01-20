@@ -1,0 +1,129 @@
+/* Paleta de colores extraída de tus imágenes */
+:host {
+    --primary-green: #8bc34a; /* El verde que aparece en tu VS Code */
+    --light-green-bg: #f4f7f1;
+    --card-green: #69f0ae;
+    --card-red: #ff8a80;
+    --card-blue: #90caf9;
+    --border-gray: #e0e0e0;
+}
+
+.container {
+    background-color: var(--light-green-bg);
+    min-height: 100vh;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+/* NAVBAR */
+.navbar {
+    background: var(--primary-green);
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    justify-content: space-between;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.navbar nav a {
+    margin: 0 10px;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+    color: white;
+}
+
+.logout {
+    background: transparent;
+    border: 1px solid white;
+    color: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+/* BIENVENIDO Y TARJETAS */
+.title {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 24px;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.card {
+    border-radius: 10px;
+    padding: 15px;
+    width: 180px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.card.green { background-color: var(--card-green); }
+.card.red { background-color: var(--card-red); }
+.card.blue { background-color: var(--card-blue); }
+
+.card p { margin: 0; font-size: 12px; }
+.card h3 { margin: 5px 0; font-size: 20px; }
+
+/* SECCIÓN DE LISTAS (GRID) */
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.box {
+    text-align: center;
+}
+
+.box h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+/* DISEÑO DE ITEM (IGUAL A TU IMAGEN) */
+.item {
+    background: white;
+    border: 2px solid var(--primary-green); /* Borde verde de la imagen */
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    background-color: #bdbdbd;
+    border-radius: 50%;
+}
+
+.item strong { display: block; font-size: 14px; }
+.item p { margin: 2px 0; font-size: 12px; color: #555; }
+.badge {
+    font-size: 11px;
+    font-weight: bold;
+    color: #333;
+}
+
+.more {
+    color: #2196f3;
+    font-size: 12px;
+    text-decoration: underline;
+    cursor: pointer;
+}
