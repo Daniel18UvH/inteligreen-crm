@@ -1,93 +1,55 @@
-// src/app/features/dashboard/dashboard.component.ts
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { AuthService } from '../../core/services/auth.service';
+import { Cliente } from '../../core/models/user.model';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule],
-  styleUrls: ['./dashboard.component.css'],
-  template: `
-    <header class="navbar">
-      <div class="logo">🌱 Inteligreen</div>
-      <nav>
-        <a>Contactos</a>
-        <a>Proyectos</a>
-        @if (user?.role === 'admin') {
-          <a>Usuarios</a>
-          <a>Descargas</a>
-        }
-      </nav>
-      <button class="logout" (click)="logout()" title="Cerrar sesión">⎋</button>
-    </header>
-
-    <main class="container">
-      <h2 class="title">Bienvenido, {{ user?.name || 'Usuario' }}</h2>
-
-      <section class="cards">
-        <div class="card green">
-          <p>{{ user?.role === 'admin' ? 'Clientes Totales' : 'Mis Clientes Activos' }}</p>
-          <h3>{{ user?.role === 'admin' ? '10,000' : '700' }}</h3>
-        </div>
-
-        @if (user?.role === 'admin') {
-          <div class="card red">
-            <p>Clientes Importantes</p>
-            <h3>10,000</h3>
-          </div>
-        } @else {
-          <div class="card red">
-            <p>Mis Proyectos Abiertos</p>
-            <h3>200</h3>
-          </div>
-        }
-
-        <div class="card blue">
-          <p>{{ user?.role === 'admin' ? 'Proyectos Abiertos' : 'Pasos Pendientes' }}</p>
-          <h3>{{ user?.role === 'admin' ? '3,500' : '150' }}</h3>
-        </div>
-      </section>
-
-      <section class="grid">
-        <div class="box">
-          <h3>{{ user?.role === 'admin' ? 'Últimos Clientes Agregados' : 'Mis Últimos Clientes' }}</h3>
-          <div class="item">
-            <div class="avatar"></div>
-            <div>
-              <strong>Jorge Estrada</strong>
-              <p>4277897890</p>
-              <span class="badge">Estado: Importante</span>
-            </div>
-          </div>
-          <a class="more">Ver más...</a>
-        </div>
-
-        <div class="box">
-          <h3>Últimas Modificaciones</h3>
-          <div class="item">
-            <div class="avatar"></div>
-            <div>
-              <strong>Customer1</strong>
-              <p>Proyecto: Ceteo Company</p>
-              <small>Acción: Actualización</small>
-            </div>
-          </div>
-          <a class="more">Ver más...</a>
-        </div>
-      </section>
-    </main>
-  `
+  imports: [CommonModule, FormsModule],
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css']
 })
-export default class DashboardComponent {
+export default class DashboardComponent implements OnInit {
   private auth = inject(AuthService);
-  private router = inject(Router);
+  private sanitizer = inject(DomSanitizer);
 
   user = this.auth.getUser();
+  mapUrl!: SafeResourceUrl; 
+
+  nuevoCliente: Partial<Cliente> = { nivel: 'Normal', estado: 'Prospecto' };
+  clientesRaw: Cliente[] = [
+    { id: 1, nombre: 'Residencial San Gil', telefono: '4271012030', correo: 'c@c.mx', direccion: 'SJR', nivel: 'Normal', estado: 'Seguimiento' },
+    { id: 2, nombre: 'Empresa Valle Oro', telefono: '4279876543', correo: 'i@s.mx', direccion: 'SJR', nivel: 'Importante', estado: 'Instalación' }
+  ];
+  clientes: Cliente[] = [];
+
+  ngOnInit() {
+    // URL Pública para Plaza Oriente sin necesidad de API Key activa
+    this.mapUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+      'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3744.1561!2d-99.9961!3d20.3889!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjDCsDIzJzIwLjAiTiA5OcKwNTknNDYuMCJX!5e0!3m2!1ses!2smx!4v1700000000000'
+    );
+    this.actualizarVista();
+  }
+
+  actualizarVista() {
+    this.clientes = this.user?.role === 'admin' 
+      ? this.clientesRaw 
+      : this.clientesRaw.filter(c => c.nivel === 'Normal');
+  }
+
+  agregarCliente() {
+    if (this.nuevoCliente.nombre && this.nuevoCliente.telefono) {
+      this.clientesRaw.unshift({ id: Date.now(), ...this.nuevoCliente } as Cliente);
+      this.nuevoCliente = { nivel: 'Normal', estado: 'Prospecto' };
+      this.actualizarVista();
+    }
+  }
 
   logout() {
     this.auth.logout();
-    this.router.navigate(['/login']);
+    window.location.reload();
   }
 }

@@ -1,0 +1,55 @@
+<div class="dashboard-wrapper">
+  <aside class="sidebar">
+    <div style="text-align: center; margin-bottom: 30px;">
+      <h2 style="color: var(--inteligreen-dark);">🌱 INTELIGREEN</h2>
+    </div>
+    <nav style="display: flex; flex-direction: column; gap: 10px;">
+      <a style="padding: 10px; background: var(--inteligreen-green); color: white; border-radius: 8px; text-decoration: none;">Dashboard</a>
+      <a style="padding: 10px; color: #666; text-decoration: none;">Proyectos</a>
+    </nav>
+  </aside>
+
+  <main class="main-content">
+    <header class="top-nav">
+      <div class="nav-links">
+        <a href="#">FAQs</a> <a href="#">Otros Servicios</a> <a href="#">Qué nos hace diferentes</a>
+      </div>
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <span style="font-weight: bold; color: #333;">{{ user?.name }}</span>
+        <button (click)="logout()" style="background: #ef4444; color: white; border: none; padding: 6px 16px; border-radius: 20px; cursor: pointer;">Salir</button>
+      </div>
+    </header>
+
+    <section style="padding: 25px 25px 0;" *ngIf="user?.role !== 'junior'">
+      <div style="background: white; border-radius: 15px; padding: 20px; border: 1px solid #e2e8f0; display: flex; flex-wrap: wrap; gap: 15px;">
+        <input type="text" [(ngModel)]="nuevoCliente.nombre" placeholder="Nombre" style="flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
+        <input type="tel" [(ngModel)]="nuevoCliente.telefono" placeholder="Teléfono" style="flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
+        <button (click)="agregarCliente()" style="background: var(--inteligreen-dark); color: white; border: none; padding: 10px 25px; border-radius: 8px; cursor: pointer; font-weight: bold;">+ Registrar</button>
+      </div>
+    </section>
+
+    <section class="client-grid">
+      <div class="card-cliente" *ngFor="let c of clientes">
+        <div class="avatar">{{ c.nombre[0] }}</div>
+        <div style="flex-grow: 1;">
+          <h4 style="margin: 0; color: #333;">{{ c.nombre }}</h4>
+          <p style="margin: 2px 0; font-size: 0.85rem; color: #666;">{{ c.telefono }} | {{ c.estado }}</p>
+        </div>
+        <span [style.color]="c.nivel === 'Importante' ? '#dc2626' : '#666'" style="font-size: 0.7rem; font-weight: bold;">
+          {{ c.nivel }}
+        </span>
+      </div>
+    </section>
+
+    <section class="map-container">
+      <div style="margin-bottom: 15px; color: #333;">📍 <strong>Ubicación Plaza Oriente</strong></div>
+      <div class="map-responsive">
+        <iframe [src]="mapUrl" loading="lazy"></iframe>
+      </div>
+    </section>
+
+    <footer style="text-align: center; padding: 20px; background: white; border-top: 1px solid #ddd; font-weight: bold; color: var(--inteligreen-dark);">
+      Inteligreen: Ecotecnologías a tu alcance
+    </footer>
+  </main>
+</div>

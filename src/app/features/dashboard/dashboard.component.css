@@ -1,129 +1,99 @@
-/* Paleta de colores extraída de tus imágenes */
 :host {
-    --primary-green: #8bc34a; /* El verde que aparece en tu VS Code */
-    --light-green-bg: #f4f7f1;
-    --card-green: #69f0ae;
-    --card-red: #ff8a80;
-    --card-blue: #90caf9;
-    --border-gray: #e0e0e0;
+  --inteligreen-green: #8bc34a;
+  --inteligreen-dark: #2e7d32;
+  --bg-light: #f4f7f1;
+  --white: #ffffff;
 }
 
-.container {
-    background-color: var(--light-green-bg);
-    min-height: 100vh;
-    padding: 20px;
-    font-family: Arial, sans-serif;
+.dashboard-wrapper {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--bg-light);
+  font-family: 'Segoe UI', Arial, sans-serif;
 }
 
-/* NAVBAR */
-.navbar {
-    background: var(--primary-green);
-    color: white;
-    display: flex;
-    align-items: center;
-    padding: 10px 20px;
-    justify-content: space-between;
-    border-radius: 4px;
-    margin-bottom: 20px;
+/* Sidebar con identidad corporativa */
+.sidebar {
+  width: 250px;
+  background: var(--white);
+  border-right: 3px solid var(--inteligreen-green);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
-.navbar nav a {
-    margin: 0 10px;
-    cursor: pointer;
-    font-size: 14px;
-    text-decoration: none;
-    color: white;
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
 }
 
-.logout {
-    background: transparent;
-    border: 1px solid white;
-    color: white;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
+/* Navbar superior con menú del borrador web */
+.top-nav {
+  background: var(--white);
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
-/* BIENVENIDO Y TARJETAS */
-.title {
-    text-align: center;
-    margin: 20px 0;
-    font-size: 24px;
+.nav-links a {
+  margin-right: 20px;
+  color: #666;
+  text-decoration: none;
+  font-size: 0.9rem;
 }
 
-.cards {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 30px;
+/* Diseño de Cuadros (Cards) Dinámicos */
+.client-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 25px;
 }
 
-.card {
-    border-radius: 10px;
-    padding: 15px;
-    width: 180px;
-    text-align: center;
-    color: white;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+.card-cliente {
+  background: var(--white);
+  border-radius: 12px;
+  border: 2px solid var(--inteligreen-green);
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
 }
 
-.card.green { background-color: var(--card-green); }
-.card.red { background-color: var(--card-red); }
-.card.blue { background-color: var(--card-blue); }
-
-.card p { margin: 0; font-size: 12px; }
-.card h3 { margin: 5px 0; font-size: 20px; }
-
-/* SECCIÓN DE LISTAS (GRID) */
-.grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.box {
-    text-align: center;
-}
-
-.box h3 {
-    font-size: 18px;
-    margin-bottom: 15px;
-}
-
-/* DISEÑO DE ITEM (IGUAL A TU IMAGEN) */
-.item {
-    background: white;
-    border: 2px solid var(--primary-green); /* Borde verde de la imagen */
-    border-radius: 12px;
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 10px;
-    text-align: left;
-}
+.card-cliente:hover { transform: translateY(-5px); }
 
 .avatar {
-    width: 50px;
-    height: 50px;
-    background-color: #bdbdbd;
-    border-radius: 50%;
+  width: 50px; height: 50px;
+  background: #f1f8e9;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--inteligreen-green); font-weight: bold;
 }
 
-.item strong { display: block; font-size: 14px; }
-.item p { margin: 2px 0; font-size: 12px; color: #555; }
-.badge {
-    font-size: 11px;
-    font-weight: bold;
-    color: #333;
+/* Mapa Responsivo al Final */
+.map-container { padding: 0 25px 25px; }
+.map-responsive {
+  position: relative;
+  padding-bottom: 45%; /* 16:9 en escritorio */
+  height: 0;
+  overflow: hidden;
+  border-radius: 15px;
+  border: 5px solid white;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
-.more {
-    color: #2196f3;
-    font-size: 12px;
-    text-decoration: underline;
-    cursor: pointer;
+.map-responsive iframe {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;
+}
+
+/* Responsividad para móviles */
+@media (max-width: 1024px) {
+  .sidebar { display: none; }
+  .map-responsive { padding-bottom: 70%; }
 }
