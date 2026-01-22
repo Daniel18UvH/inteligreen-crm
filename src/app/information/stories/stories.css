@@ -1,0 +1,184 @@
+/* --- Estilos Generales --- */
+:host {
+  display: block;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  /* El overflow-x hidden es vital para que nada "empuje" la pantalla a los lados */
+  overflow-x: hidden; 
+}
+
+.page-header {
+    background-color: #fff;
+    padding: 15px 5%;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+    border-bottom: 1px solid #eee;
+}
+
+.testimonials-section {
+  background-color: #fff0ed;
+  /* clamp(mínimo, flujo, máximo) para el padding lateral y vertical */
+  padding: clamp(40px, 8vw, 80px) 5%; 
+}
+
+.testimonials-container {
+  max-width: 1100px; 
+  margin: 0 auto;
+  /* Añadimos un padding extra de seguridad */
+  padding: 0 10px; 
+  box-sizing: border-box;
+}
+
+/* --- Encabezado --- */
+.testimonials-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.testimonials-header h3 {
+  font-weight: 800;
+  font-size: clamp(1.5rem, 5vw, 2.2rem); 
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  color: #000;
+  line-height: 1.2;
+}
+
+.testimonials-header p {
+  color: #555;
+  font-size: 1rem;
+}
+
+/* --- Grid de Testimonios (Simetría 2x2) --- */
+.testimonials-grid {
+  display: grid;
+  /* 2 columnas por defecto en PC/Tablet */
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 30px; 
+  width: 100%;
+}
+
+/* --- Tarjetas --- */
+.testimonial-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  aspect-ratio: 16 / 11; /* Proporción ligeramente más alta para lucir el texto */
+  min-height: 280px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+  transition: transform 0.4s ease;
+  /* Asegura que la tarjeta no se estire más allá del grid */
+  width: 100%; 
+}
+
+.testimonial-card:hover {
+  transform: translateY(-8px);
+}
+
+.card-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Overlay con degradado para legibilidad */
+.card-overlay {
+  position: absolute;
+  inset: 0; 
+  background: linear-gradient(to bottom, transparent 30%, rgba(0,0,0,0.85) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(15px, 4vw, 30px);
+  box-sizing: border-box;
+}
+
+.quote {
+  color: #fff;
+  font-weight: 600;
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+.name {
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.85rem;
+  display: block;
+}
+
+.role {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.75rem;
+}
+
+/* --- SECCIÓN DE IMPACTO / ESTADÍSTICAS --- */
+.impact-section {
+    padding: clamp(40px, 8vw, 80px) 5%;
+    background-color: #fff;
+}
+
+.impact-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.impact-header h2 {
+    font-size: clamp(1.4rem, 4vw, 1.8rem);
+    color: #000;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    font-weight: 800;
+}
+
+.stats-box {
+    background-color: #fff0ed;
+    border-radius: 30px;
+    padding: 60px 20px;
+    display: grid;
+    /* Grid flexible para las estadísticas */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    margin: 0 auto;
+}
+
+.stat-number {
+    font-size: clamp(2.5rem, 8vw, 3.5rem); 
+    font-weight: 900;
+    color: #dc3545;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #444;
+}
+
+/* --- AJUSTES ESPECÍFICOS PARA MÓVILES --- */
+@media (max-width: 850px) {
+    /* En tablets/móviles pasamos a 1 columna para evitar que se peguen */
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .testimonial-card {
+        aspect-ratio: 4 / 3; /* Proporción más natural para celulares */
+    }
+
+    .testimonials-section {
+        padding: 40px 20px; /* Reducimos padding lateral en celulares */
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-box {
+        padding: 40px 15px;
+        border-radius: 20px;
+    }
+}

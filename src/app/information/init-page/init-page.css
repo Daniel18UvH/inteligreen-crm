@@ -1,0 +1,153 @@
+/* --- Estilos Base --- */
+:host {
+    display: block;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: clamp(20px, 5vw, 40px) 20px;
+}
+
+/* Tipografía Fluida */
+h1 { font-size: clamp(1.8rem, 6vw, 2.5rem); font-weight: 800; line-height: 1.2; }
+h2 { font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 800; margin-bottom: 20px; }
+
+/* --- Sección 1: Hero --- */
+.hero {
+    background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), 
+                url('../../../../public/images/featImg3.jpg') no-repeat center center/cover;
+    min-height: 70vh; /* Cambiado de 80vh a min-height */
+    display: flex;
+    align-items: center;
+    padding: 40px 5%;
+}
+
+.hero-card {
+    background: white;
+    padding: clamp(20px, 5vw, 40px);
+    border-radius: 20px;
+    max-width: 500px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* --- Sección 2: Garantía --- */
+.guarantee {
+    background-color: #fdf2f0;
+    padding: 60px 0;
+}
+
+.flex-container {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap; /* Importante para que la imagen baje en móvil */
+}
+
+.image-box {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    justify-content: center;
+}
+
+.image-box img {
+    width: 100%;
+    max-width: 450px;
+    height: auto; /* Eliminado el height: 500px fijo */
+    border-radius: 15px;
+    object-fit: contain;
+}
+
+.text-box { flex: 1; min-width: 300px; }
+
+/* --- Sección 3: Ingeniería --- */
+.engineering { background-color: #eaf6f7; padding: 60px 0; }
+
+.eng-header {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.feature-item {
+    display: flex;
+    gap: 15px;
+    max-width: 450px;
+}
+
+.icon { color: #d04b4b; font-weight: bold; font-size: 1.2rem; }
+
+.eng-image img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 7; /* Mantiene proporción cinemática */
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+/* --- Sección 4: Grid de Beneficios --- */
+.grid-benefits {
+    display: grid;
+    /* Ajuste automático de columnas según el ancho disponible */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.benefit img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+/* --- Sección 5: Testimonios --- */
+.testimonials { background-color: #fdf2f0; padding: 60px 0; }
+
+.testimonial-cards {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    flex: 1;
+    min-width: 300px; /* Las tarjetas se ajustan solas */
+    max-width: 350px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+/* --- MEDIA QUERIES --- */
+@media (max-width: 768px) {
+    .hero {
+        justify-content: center; /* Centra la tarjeta en móviles */
+        padding-left: 0;
+        text-align: center;
+    }
+
+    .hero-card {
+        margin: 0 20px;
+    }
+
+    .flex-container {
+        flex-direction: column; /* Asegura el orden vertical */
+        text-align: center;
+    }
+
+    .image-box img {
+        max-width: 100%; /* La imagen del recibo ocupa el ancho total */
+    }
+}
